@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ttltechnologies | Custom QR Code Design & Printing</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FAFAFA;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .preview-dot {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        /* Carousel crossfade animations */
+        .carousel-item {
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+</head>
+<body class="text-neutral-800 min-h-screen flex flex-col justify-between antialiased relative">
+
+    <header class="border-b border-neutral-200 bg-white/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2.5">
+                <div class="text-neutral-900">
+                    <i class="fa-solid fa-qrcode text-2xl"></i>
+                </div>
+                <span class="text-lg font-bold tracking-tight text-neutral-900">TTL Technologies</span>
+            </div>
+            <a href="#contact" class="text-sm font-semibold text-neutral-600 hover:text-neutral-950 transition-colors">
+                Contact Us
+            </a>
+        </div>
+    </header>
+
+    <button id="backToTopBtn" class="fixed bottom-6 right-6 z-50 bg-white text-neutral-800 border border-neutral-200 shadow-lg w-11 h-11 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 transform translate-y-10 opacity-0 pointer-events-none hover:bg-neutral-900 hover:text-white hover:border-neutral-900 hover:-translate-y-0.5 active:translate-y-0" aria-label="Scroll back to top">
+        <i class="fa-solid fa-arrow-up text-sm"></i>
+    </button>
+
+    <main class="flex-grow">
+        
+        <!-- Dynamic Fullscreen Lightbox Frame Container Component -->
+        <div id="fullscreenViewer" class="fixed inset-0 bg-neutral-950/95 z-[100] hidden items-center justify-center backdrop-blur-sm opacity-0 transition-opacity duration-300" onclick="closeFullscreenImg()">
+            <button onclick="closeFullscreenImg()" class="absolute top-6 right-6 text-white/70 hover:text-white text-xl p-2 z-[110] transition-colors" aria-label="Close Fullscreen View">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="max-w-[95vw] max-h-[90vh] flex items-center justify-center" onclick="event.stopPropagation()">
+                <img id="fullscreenTargetImg" src="" alt="Expanded Presentation View" class="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl transition-transform duration-300 scale-95">
+            </div>
+        </div>
+
+        <section class="py-16 max-w-5xl mx-auto px-6">
+            <div class="text-center max-w-xl mx-auto mb-16">
+                <h2 class="text-2xl font-bold text-neutral-900 mb-2">Supported Scan Destinations</h2>
+                <p class="text-sm text-neutral-500">We configure your codes to route data seamlessly according to your custom application needs. Here is exactly what users experience upon scanning.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white border border-neutral-200 rounded-2xl p-5 flex flex-col justify-between shadow-sm">
+                    <div class="w-full bg-neutral-50 border border-neutral-150 rounded-xl p-4 mb-5 flex flex-col items-center">
+                        <div class="w-full flex items-center justify-between border-b border-neutral-200 pb-1.5 mb-3 text-[10px] text-neutral-400 font-semibold uppercase tracking-wider">
+                            <span>Browser Link</span>
+                            <i class="fa-solid fa-globe"></i>
+                        </div>
+                        <div class="w-full bg-white border border-neutral-200 rounded-lg p-2 text-center shadow-xs">
+                            <p class="text-[10px] text-blue-600 font-medium truncate">https://yourwebsite.com</p>
+                            <div class="h-2 bg-neutral-100 rounded-full w-3/4 mx-auto mt-2"></div>
+                            <div class="h-2 bg-neutral-100 rounded-full w-1/2 mx-auto mt-1"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-sm text-neutral-900 mb-1.5 flex items-center gap-2">
+                            <i class="fa-solid fa-link text-neutral-400 text-xs"></i> Website URL Link
+                        </h4>
+                        <p class="text-xs text-neutral-500 leading-relaxed">Instantly opens your online storefront, portfolio, payment gateway, social channel, or landing menu pages inside the user's default browser.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-neutral-200 rounded-2xl p-5 flex flex-col justify-between shadow-sm">
+                    <div class="w-full bg-neutral-50 border border-neutral-150 rounded-xl p-4 mb-5 flex flex-col items-center">
+                        <div class="w-full flex items-center justify-between border-b border-neutral-200 pb-1.5 mb-3 text-[10px] text-neutral-400 font-semibold uppercase tracking-wider">
+                            <span>Offline Text</span>
+                            <i class="fa-solid fa-align-left"></i>
+                        </div>
+                        <div class="w-full bg-white border border-neutral-200 rounded-lg p-2 shadow-xs space-y-1.5">
+                            <div class="h-1.5 bg-neutral-800 rounded-full w-full"></div>
+                            <div class="h-1.5 bg-neutral-800 rounded-full w-11/12"></div>
+                            <div class="h-1.5 bg-neutral-400 rounded-full w-2/3"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-sm text-neutral-900 mb-1.5 flex items-center gap-2">
+                            <i class="fa-solid fa-font text-neutral-400 text-xs"></i> Plain Text
+                        </h4>
+                        <p class="text-xs text-neutral-500 leading-relaxed">Displays raw instructions, industrial alphanumeric serial codes, system text keys, or coupon codes immediately on-screen without requiring internet.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-neutral-200 rounded-2xl p-5 flex flex-col justify-between shadow-sm">
+                    <div class="w-full bg-neutral-50 border border-neutral-150 rounded-xl p-4 mb-5 flex flex-col items-center">
+                        <div class="w-full flex items-center justify-between border-b border-neutral-200 pb-1.5 mb-3 text-[10px] text-neutral-400 font-semibold uppercase tracking-wider">
+                            <span>Save Contact</span>
+                            <i class="fa-solid fa-address-book"></i>
+                        </div>
+                        <div class="w-full bg-white border border-neutral-200 rounded-lg p-2 flex items-center space-x-2.5 shadow-xs">
+                            <div class="w-6 h-6 bg-neutral-200 rounded-full flex items-center justify-center text-[10px] font-bold text-neutral-600">JD</div>
+                            <div class="flex-1 space-y-1">
+                                <div class="h-1.5 bg-neutral-800 rounded-full w-3/4"></div>
+                                <div class="h-1 bg-neutral-400 rounded-full w-1/2"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-sm text-neutral-900 mb-1.5 flex items-center gap-2">
+                            <i class="fa-solid fa-id-card text-neutral-400 text-xs"></i> vCard Contact Profile
+                        </h4>
+                        <p class="text-xs text-neutral-500 leading-relaxed">Prompts smartphones to automatically populate name fields, office telephone lines, company email streams, and map locations into native address books.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-neutral-200 rounded-2xl p-5 flex flex-col justify-between shadow-sm">
+                    <div class="w-full bg-neutral-50 border border-neutral-150 rounded-xl p-4 mb-5 flex flex-col items-center">
+                        <div class="w-full flex items-center justify-between border-b border-neutral-200 pb-1.5 mb-3 text-[10px] text-neutral-400 font-semibold uppercase tracking-wider">
+                            <span>Digital Media Viewer</span>
+                            <i class="fa-solid fa-file-arrow-down"></i>
+                        </div>
+                        <div class="w-full bg-white border border-neutral-200 rounded-lg p-1.5 shadow-xs flex items-center space-x-2">
+                            <div class="w-6 h-6 bg-red-50 text-red-600 rounded flex items-center justify-center text-[10px]"><i class="fa-solid fa-file-pdf"></i></div>
+                            <div class="flex-1 space-y-1">
+                                <div class="h-1.5 bg-neutral-800 rounded-full w-5/6"></div>
+                                <div class="h-1 bg-neutral-300 rounded-full w-1/3"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-sm text-neutral-900 mb-1.5 flex items-center gap-2">
+                            <i class="fa-solid fa-file-invoice text-neutral-400 text-xs"></i> Media File (PDF/Img/Vid)
+                        </h4>
+                        <p class="text-xs text-neutral-500 leading-relaxed">Directs the user's mobile device to download or stream documents, restaurant menu lists, catalog booklets, item demo images, or advertising video frames.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 border-t border-neutral-200 bg-white">
+            <div class="text-center max-w-xl mx-auto mb-12">
+                <h2 class="text-2xl font-bold text-neutral-900 mb-2">Explore Custom Layout Styles</h2>
+                <p class="text-sm text-neutral-500">Break away from standard industrial square blocks. We customize inner matrix paths, node shapes, and surrounding branding blocks to make your layout stand out.</p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto px-6">
+                <div class="bg-white border border-neutral-200 rounded-xl p-5 flex flex-col items-center justify-between shadow-sm">
+                    <img src="https://encrypted-tbn3.gstatic.com/licensed-image?q=tbn:ANd9GcTqbjOFqzbYMjimU0Dpq3EPo3HoM2z5p1Jd4tQb-YJOjcP5T8u4tsM2YkHi9YCwcJxK5gVo4g71hcqIePo" alt="Smooth Round Nodes Style" class="w-40 h-40 object-contain mb-4 rounded-lg mix-blend-multiply">
+                    <div class="text-center w-full">
+                        <h4 class="font-semibold text-sm text-neutral-900 mb-1">Smooth Round</h4>
+                        <p class="text-xs text-neutral-500 leading-relaxed">Replaces harsh blocks with subtle round dots and circular position markers for a premium, clean layout.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-neutral-200 rounded-xl p-5 flex flex-col items-center justify-between shadow-sm">
+                    <img src="https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcQyYAKOwPeGSA8-OAA74yixcs8DFjCsZxS86U54aOyq7NhvOHEDWNsm33SVKvSQ9mFajrAnvfEmtTo68OM" alt="Dense Halftone Style" class="w-40 h-40 object-contain mb-4 rounded-lg mix-blend-multiply">
+                    <div class="text-center w-full">
+                        <h4 class="font-semibold text-sm text-neutral-900 mb-1">Dense Halftone</h4>
+                        <p class="text-xs text-neutral-500 leading-relaxed">A tightly compiled modern path system optimized to maintain reliable scannability on small print fields.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-neutral-200 rounded-xl p-5 flex flex-col items-center justify-between shadow-sm">
+                    <img src="https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcSTSsn1LkvZldStO3p3-H5X5d2IOdL6Ssyg5kDWTiC5L2PyDZ_asXdCoEfpdGTa6mylBmDjEsnjUCtgCMA" alt="Corporate Minimalist Style" class="w-40 h-40 object-contain mb-4 rounded-lg mix-blend-multiply">
+                    <div class="text-center w-full">
+                        <h4 class="font-semibold text-sm text-neutral-900 mb-1">Corporate Minimal</h4>
+                        <p class="text-xs text-neutral-500 leading-relaxed">Perfect balanced margins paired with clear alignment anchors, purpose-built for premium business cards.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-neutral-200 rounded-xl p-5 flex flex-col items-center justify-between shadow-sm">
+                    <img src="https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcQk6GOcGdSchPDJ4TqUsa-fq29srhFlPjdHcePB4ib0M_JMwA1H9nr_q4KvKpILHvfwrl2EMwcNXJNXxgI" alt="Artistic Geometric Layout Style" class="w-40 h-40 object-contain mb-4 rounded-lg mix-blend-multiply">
+                    <div class="text-center w-full">
+                        <h4 class="font-semibold text-sm text-neutral-900 mb-1">Geometric Layout</h4>
+                        <p class="text-xs text-neutral-500 leading-relaxed">Surrounds crisp matrix tracks with distinct editorial shapes, providing an eye-catching look for lifestyle brands.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 border-t border-neutral-200 bg-neutral-50/40">
+            <div class="max-w-5xl mx-auto px-6">
+                <div class="text-center max-w-xl mx-auto mb-12">
+                    <div class="inline-block bg-neutral-900 text-white font-bold text-[10px] px-2.5 py-0.5 rounded-full uppercase tracking-wider mb-2.5">Engine Studio v2.4</div>
+                    <h2 class="text-2xl font-bold text-neutral-900 mb-2">Maximum Layout Studio</h2>
+                    <p class="text-sm text-neutral-500">Fine-tune node configurations, layout colors, anchor pupil parameters, and center masking isolation directly on an interactive vector core matrix.</p>
+                </div>
+
+                <div class="bg-white border border-neutral-200 rounded-2xl shadow-sm overflow-hidden grid lg:grid-cols-12">
+                    
+                    <div class="lg:col-span-6 p-6 border-b lg:border-b-0 lg:border-r border-neutral-200 bg-white space-y-6">
+                        
+                        <div>
+                            <label class="block text-xs font-bold text-neutral-400 uppercase tracking-wider mb-2.5">1. Dot Matrix Theme</label>
+                            <div class="grid grid-cols-2 gap-2">
+                                <button onclick="updateMatrixStyle('round')" id="m-round" class="matrix-btn text-left p-2.5 border border-neutral-950 rounded-xl bg-neutral-950 text-white transition-all">
+                                    <p class="text-xs font-bold">Smooth Round</p>
+                                    <p class="text-[10px] opacity-75 mt-0.5">Sleek fluid nodes</p>
+                                </button>
+                                <button onclick="updateMatrixStyle('halftone')" id="m-halftone" class="matrix-btn text-left p-2.5 border border-neutral-200 bg-white hover:bg-neutral-50 transition-all">
+                                    <p class="text-xs font-bold text-neutral-900">Dense Halftone</p>
+                                    <p class="text-[10px] text-neutral-400 mt-0.5">High-scannability tracks</p>
+                                </button>
+                                <button onclick="updateMatrixStyle('minimal')" id="m-minimal" class="matrix-btn text-left p-2.5 border border-neutral-200 bg-white hover:bg-neutral-50 transition-all">
+                                    <p class="text-xs font-bold text-neutral-900">Corporate Minimal</p>
+                                    <p class="text-[10px] text-neutral-400 mt-0.5">Crisp business blocks</p>
+                                </button>
+                                <button onclick="updateMatrixStyle('geometric')" id="m-geometric" class="matrix-btn text-left p-2.5 border border-neutral-200 bg-white hover:bg-neutral-50 transition-all">
+                                    <p class="text-xs font-bold text-neutral-900">Geometric Edge</p>
+                                    <p class="text-[10px] text-neutral-400 mt-0.5">Abstract diamond styling</p>
+                                </button>
+                                <button onclick="updateMatrixStyle('liquid')" id="m-liquid" class="matrix-btn text-left p-2.5 border border-neutral-200 bg-white hover:bg-neutral-50 transition-all">
+                                    <p class="text-xs font-bold text-neutral-900">Liquid Connected</p>
+                                    <p class="text-[10px] text-neutral-400 mt-0.5">Organic modern layout</p>
+                                </button>
+                                <button onclick="updateMatrixStyle('cross')" id="m-cross" class="matrix-btn text-left p-2.5 border border-neutral-200 bg-white hover:bg-neutral-50 transition-all">
+                                    <p class="text-xs font-bold text-neutral-900">Abstract Cross</p>
+                                    <p class="text-[10px] text-neutral-400 mt-0.5">Premium structural matrix</p>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4 pt-2">
+                            <div>
+                                <label class="block text-xs font-bold text-neutral-400 uppercase tracking-wider mb-2">2A. Eye Eyeball (Outer)</label>
+                                <select onchange="updateEyeOuter(this.value)" class="w-full bg-white border border-neutral-200 rounded-lg p-2 text-xs font-semibold text-neutral-800 focus:outline-none focus:border-neutral-950">
+                                    <option value="rounded-full">Circular Frame</option>
+                                    <option value="rounded-none">Sharp Square</option>
+                                    <option value="rounded-xl">Soft Dynamic Pill</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-neutral-400 uppercase tracking-wider mb-2">2B. Eye Pupil (Inner)</label>
+                                <select onchange="updateEyeInner(this.value)" class="w-full bg-white border border-neutral-200 rounded-lg p-2 text-xs font-semibold text-neutral-800 focus:outline-none focus:border-neutral-950">
+                                    <option value="rounded-full">Circular Core</option>
+                                    <option value="rounded-none">Sharp Core Block</option>
+                                    <option value="rounded-md">Rounded Core Diamond</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-neutral-400 uppercase tracking-wider mb-2">3. Corporate Color Profiles</label>
+                            <div class="grid grid-cols-4 gap-2">
+                                <button onclick="updateColorProfile('neutral-900')" class="color-btn border-2 border-neutral-950 p-2 rounded-xl flex items-center justify-center space-x-1.5 bg-white">
+                                    <span class="w-3 h-3 rounded-full bg-neutral-900"></span>
+                                    <span class="text-[10px] font-bold text-neutral-900">Onyx</span>
+                                </button>
+                                <button onclick="updateColorProfile('blue-600')" class="color-btn border border-neutral-200 p-2 rounded-xl flex items-center justify-center space-x-1.5 bg-white">
+                                    <span class="w-3 h-3 rounded-full bg-blue-600"></span>
+                                    <span class="text-[10px] font-medium text-neutral-6 text-neutral-600">Cyber</span>
+                                </button>
+                                <button onclick="updateColorProfile('emerald-700')" class="color-btn border border-neutral-200 p-2 rounded-xl flex items-center justify-center space-x-1.5 bg-white text-neutral-600">
+                                    <span class="w-3 h-3 rounded-full bg-emerald-700"></span>
+                                    <span class="text-[10px] font-medium">Tech</span>
+                                </button>
+                                <button onclick="updateColorProfile('red-700')" class="color-btn border border-neutral-200 p-2 rounded-xl flex items-center justify-center space-x-1.5 bg-white text-neutral-600">
+                                    <span class="w-3 h-3 rounded-full bg-red-700"></span>
+                                    <span class="text-[10px] font-medium">Royal</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 bg-neutral-50 rounded-xl border border-neutral-200">
+                            <div>
+                                <p class="text-xs font-bold text-neutral-900">4. Center Mask Logo Protection</p>
+                                <p class="text-[10px] text-neutral-400">Isolate center matrix block arrays safely</p>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="logoToggle" onchange="toggleCenterLogo(this.checked)" class="sr-only peer">
+                                <div class="w-9 h-5 bg-neutral-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-neutral-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-neutral-950"></div>
+                            </label>
+                        </div>
+
+                        <div class="pt-4 border-t border-neutral-100 flex items-center justify-between text-xs text-neutral-400">
+                            <span class="flex items-center gap-1.5"><i class="fa-solid fa-microchip"></i> Matrix Tag: <strong class="text-neutral-700 font-semibold" id="maxLayoutCode">SR-C-Onyx</strong></span>
+                            <span class="text-[11px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded font-medium flex items-center gap-1"><i class="fa-solid fa-circle-check"></i> Scannable</span>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-6 bg-neutral-50 p-6 flex flex-col items-center justify-center relative min-h-[400px]">
+                        <div class="relative bg-white p-6 rounded-3xl shadow-md border border-neutral-200 max-w-[280px] w-full">
+                            
+                            <div class="grid grid-cols-7 gap-2.5 w-full aspect-square relative" id="sandboxContainer">
+                                
+                                <div class="col-span-2 row-span-2 flex items-center justify-center p-0.5">
+                                    <div id="max-eye-tl" class="w-full h-full border-[5px] border-neutral-900 rounded-full flex items-center justify-center p-1.5 transition-all duration-300">
+                                        <div id="max-pupil-tl" class="w-full h-full bg-neutral-900 rounded-full transition-all duration-300"></div>
+                                    </div>
+                                </div>
+                                <div class="preview-dot w-3 h-3 bg-neutral-900 rounded-full m-auto"></div>
+                                <div class="preview-dot w-3 h-3 bg-neutral-900 rounded-full m-auto"></div>
+                                <div class="preview-dot w-3 h-3 bg-neutral-900 rounded-full m-auto"></div>
+                                
+                                <div class="col-span-2 row-span-2 flex items-center justify-center p-0.5">
+                                    <div id="max-eye-tr" class="w-full h-full border-[5px] border-neutral-900 rounded-full flex items-center justify-center p-1.5 transition-all duration-300">
+                                        <div id="max-pupil-tr" class="w-full h-full bg-neutral-900 rounded-full transition-all duration-300"></div>
+                                    </div>
+                                </div>
+
+                                <div class="preview-dot w-3 h-3 bg-neutral-900 rounded-full m-auto"></div>
+                                <div class="preview-dot w-3 h-3 bg-neutral-900 rounded-full m-auto"></div>
+                                <div class="preview-dot w-3 h-3 bg-neutral-900 rounded-full m-auto"></div>
+                                
+                                <div class="preview-dot w-3 h-3 bg-neutral-900 rounded-full m-auto"></div>
+                                <div id="center-node-1" class="preview-dot w-3 h-3 bg-neutral-900 rounded-full m-auto"></div>
+                                <div id="center-node-2" class="preview-dot w-3 h-3 bg-neutral-900 rounded-full m-auto"></div>
+                                <div class="preview-dot w-3 h-3 bg-neutral-900 rounded-full m-auto"></div>
+                                <div class="preview-dot w-3 h-3 bg-neutral-900 rounded-full m-auto"></div>
+                                <div id="center-node-3" class="preview-dot w-3 h-3 bg-neutral-900 rounded-full m-auto"></div>
+                                <div class="preview-dot w-3 h-3 bg-neutral-900 rounded-full m-auto"></div>
+
+                                <div class="preview-dot w-3 h-3 bg-neutral-900 rounded-full m-auto"></div>
+                                <div class="preview-dot w-3 h-3 bg-neutral-900 rounded-full m-auto"></div>
+                                <div id="center-node-4" class="preview-dot w-3 h-3 bg-neutral-900 rounded-full m-auto"></div>
+                                <div class="preview-dot w-3 h-3 bg-neutral-900 rounded-full m-auto"></div>
+                                <div class="preview-dot w-3 h-3 bg-neutral-900 rounded-full m-auto"></div>
+                                <div class="preview-dot w-3 h-3 bg-neutral-900 rounded-full m-auto"></div>
+                                <div class="preview-dot w-3 h-3 bg-neutral-900 rounded-full m-auto"></div>
+
+                                <div class="col-span-2 row-span-2 flex items-center justify-center p-0.5">
+                                    <div id="max-eye-bl" class="w-full h-full border-[5px] border-neutral-900 rounded-full flex items-center justify-center p-1.5 transition-all duration-300">
+                                        <div id="max-pupil-bl" class="w-full h-full bg-neutral-900 rounded-full transition-all duration-300"></div>
+                                    </div>
+                                </div>
+                                <div class="preview-dot w-3 h-3 bg-neutral-900 rounded-full m-auto"></div>
+                                <div id="center-node-5" class="preview-dot w-3 h-3 bg-neutral-900 rounded-full m-auto"></div>
+                                <div class="preview-dot w-3 h-3 bg-neutral-900 rounded-full m-auto"></div>
+                                <div class="preview-dot w-3 h-3 bg-neutral-900 rounded-full m-auto"></div>
+                                <div class="preview-dot w-3 h-3 bg-neutral-900 rounded-full m-auto"></div>
+
+                                <div class="preview-dot w-3 h-3 bg-neutral-900 rounded-full m-auto"></div>
+                                <div class="preview-dot w-3 h-3 bg-neutral-900 rounded-full m-auto"></div>
+                                <div class="preview-dot w-3 h-3 bg-neutral-900 rounded-full m-auto"></div>
+                                <div class="preview-dot w-3 h-3 bg-neutral-900 rounded-full m-auto"></div>
+                                <div class="preview-dot w-3 h-3 bg-neutral-900 rounded-full m-auto"></div>
+
+                                <div class="preview-dot w-3 h-3 bg-neutral-900 rounded-full m-auto"></div>
+                                <div class="preview-dot w-3 h-3 bg-neutral-900 rounded-full m-auto"></div>
+                                <div class="preview-dot w-3 h-3 bg-neutral-900 rounded-full m-auto"></div>
+                                <div class="preview-dot w-3 h-3 bg-neutral-900 rounded-full m-auto"></div>
+                                <div class="preview-dot w-3 h-3 bg-neutral-900 rounded-full m-auto"></div>
+                                <div class="preview-dot w-3 h-3 bg-neutral-900 rounded-full m-auto"></div>
+                                <div class="preview-dot w-3 h-3 bg-neutral-900 rounded-full m-auto"></div>
+
+                                <div id="sandboxLogoCore" class="absolute inset-0 m-auto w-11 h-11 bg-white border border-neutral-200 rounded-xl shadow-md flex items-center justify-center scale-0 opacity-0 transition-all duration-300 z-10">
+                                    <i class="fa-solid fa-briefcase text-neutral-800 text-sm" id="sandboxLogoIcon"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 border-t border-neutral-200 bg-white">
+            <div class="max-w-4xl mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
+                <div class="w-full md:w-1/2 flex justify-center">
+                    <div class="relative bg-white border border-neutral-200 p-6 rounded-2xl shadow-md max-w-[280px]">
+                        <div class="grid grid-cols-3 gap-2 opacity-90">
+                            <div class="w-16 h-16 border-4 border-neutral-900 rounded-lg p-1 flex items-center justify-center"><div class="w-full h-full bg-neutral-900 rounded-sm"></div></div>
+                            <div class="w-16 h-16 flex flex-wrap gap-1 p-1 content-start"><div class="w-3 h-3 bg-neutral-900 rounded-sm"></div><div class="w-3 h-3 bg-neutral-900 rounded-sm"></div><div class="w-6 h-3 bg-neutral-900 rounded-sm"></div><div class="w-3 h-6 bg-neutral-900 rounded-sm"></div></div>
+                            <div class="w-16 h-16 border-4 border-neutral-900 rounded-lg p-1 flex items-center justify-center"><div class="w-full h-full bg-neutral-900 rounded-sm"></div></div>
+                            <div class="w-16 h-16 flex flex-wrap gap-1 p-1"><div class="w-3 h-6 bg-neutral-900 rounded-sm"></div><div class="w-6 h-3 bg-neutral-900 rounded-sm"></div><div class="w-3 h-3 bg-neutral-900 rounded-sm"></div></div>
+                            <div class="w-16 h-16 bg-transparent"></div> 
+                            <div class="w-16 h-16 flex flex-wrap gap-1 p-1"><div class="w-6 h-6 bg-neutral-900 rounded-sm"></div><div class="w-3 h-3 bg-neutral-900 rounded-sm"></div></div>
+                            <div class="w-16 h-16 border-4 border-neutral-900 rounded-lg p-1 flex items-center justify-center"><div class="w-full h-full bg-neutral-900 rounded-sm"></div></div>
+                            <div class="w-16 h-16 flex flex-wrap gap-1 p-1"><div class="w-3 h-3 bg-neutral-900 rounded-sm"></div><div class="w-6 h-3 bg-neutral-900 rounded-sm"></div></div>
+                            <div class="w-16 h-16 flex flex-wrap gap-1 p-1"><div class="w-4 h-4 bg-neutral-900 rounded-sm"></div><div class="w-4 h-4 bg-neutral-900 rounded-sm"></div></div>
+                        </div>
+                        <div class="absolute inset-0 m-auto w-16 h-16 bg-white border border-neutral-200 rounded-xl shadow-lg flex items-center justify-center text-neutral-900 text-xl font-bold">
+                            <i class="fa-solid fa-briefcase text-neutral-800"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="w-full md:w-1/2 space-y-4">
+                    <div class="inline-block bg-neutral-900 text-white font-bold text-[10px] px-2.5 py-0.5 rounded-full uppercase tracking-wider">Brand Integration</div>
+                    <h3 class="text-2xl font-bold text-neutral-900 tracking-tight">Seamless Center Logo Placement</h3>
+                    <p class="text-sm text-neutral-500 leading-relaxed">
+                        We don't simply paste an image over your code. Our advanced design process maps out a specific isolation padding zone right in the center of the pixel matrix layout. 
+                    </p>
+                    <p class="text-sm text-neutral-500 leading-relaxed">
+                        This guarantees that your corporate emblem or brand mark sits beautifully in the spotlight without altering or overlapping the code's essential data tracking paths.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 border-t border-neutral-200 bg-neutral-50/50">
+            <div class="max-w-4xl mx-auto px-6">
+                <div class="text-center max-w-xl mx-auto mb-16">
+                    <h2 class="text-2xl font-bold text-neutral-900 mb-2">Built-In Error Correction</h2>
+                    <p class="text-sm text-neutral-500">Error correction restores missing data if your printed code gets scratched or stained. Higher levels append backup data matrices, allowing us to safely place your company logo over the center nodes.</p>
+                </div>
+
+                <div class="bg-white border border-neutral-200 rounded-2xl p-6 md:p-10 shadow-sm max-w-3xl mx-auto">
+                    <div class="flex justify-between items-center border-b border-neutral-200 pb-4 mb-8">
+                        <h3 class="text-xs font-bold text-neutral-400 uppercase tracking-wider">Damage Recovery Threshold</h3>
+                        <span class="text-xs text-neutral-500 flex items-center gap-1.5"><i class="fa-solid fa-shield text-neutral-400"></i> Auto-Repair Matrix Capacity</span>
+                    </div>
+
+                    <div class="space-y-8">
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-end text-sm">
+                                <div class="flex items-center space-x-3">
+                                    <span class="font-bold text-neutral-900 w-16">Level L</span>
+                                    <span class="text-xs text-neutral-400 hidden sm:inline">Screen Optimized</span>
+                                </div>
+                                <span class="font-semibold text-neutral-600">7% Damage Restored</span>
+                            </div>
+                            <div class="w-full bg-neutral-100 h-3 rounded-full overflow-hidden">
+                                <div class="bg-neutral-300 h-full rounded-full" style="width: 7%"></div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-end text-sm">
+                                <div class="flex items-center space-x-3">
+                                    <span class="font-bold text-neutral-900 w-16">Level M</span>
+                                    <span class="text-xs text-neutral-400 hidden sm:inline">Standard Print</span>
+                                </div>
+                                <span class="font-semibold text-neutral-700">15% Damage Restored</span>
+                            </div>
+                            <div class="w-full bg-neutral-100 h-3 rounded-full overflow-hidden">
+                                <div class="bg-neutral-400 h-full rounded-full" style="width: 15%"></div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-end text-sm">
+                                <div class="flex items-center space-x-3">
+                                    <span class="font-bold text-neutral-900 w-16">Level Q</span>
+                                    <span class="text-xs text-neutral-400 hidden sm:inline">Outdoor Signage</span>
+                                </div>
+                                <span class="font-semibold text-neutral-800">25% Damage Restored</span>
+                            </div>
+                            <div class="w-full bg-neutral-100 h-3 rounded-full overflow-hidden">
+                                <div class="bg-neutral-600 h-full rounded-full" style="width: 25%"></div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-end text-sm">
+                                <div class="flex items-center space-x-3">
+                                    <span class="font-bold text-neutral-950 w-16">Level H</span>
+                                    <span class="text-xs text-neutral-500 font-medium bg-neutral-200 px-2 py-0.5 rounded sm:inline hidden">Logo Integrated</span>
+                                </div>
+                                <span class="font-bold text-neutral-950">30% Maximum Protection</span>
+                            </div>
+                            <div class="w-full bg-neutral-100 h-3 rounded-full overflow-hidden">
+                                <div class="bg-neutral-950 h-full rounded-full" style="width: 30%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 border-t border-neutral-200 pt-4 flex items-center space-x-2 text-xs text-neutral-400">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <p>Higher recovery levels increase code density slightly to ensure seamless scanning even under heavy physical abrasion.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="max-w-xl mx-auto px-6 py-20 text-center">
+            <div class="text-neutral-300 text-3xl mb-4">
+                <i class="fa-solid fa-qrcode"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-neutral-900 mb-2">Start a project with us</h2>
+            <p class="text-sm text-neutral-500 mb-8">Reach out directly via phone or email. We handle both custom single designs and high-volume commercial printing orders.</p>
+            
+            <div class="grid sm:grid-cols-3 gap-4 max-w-lg mx-auto pt-4 border-t border-neutral-200">
+                <a href="tel:7411081276" class="flex items-center justify-center space-x-2.5 bg-neutral-900 hover:bg-neutral-800 text-white font-semibold text-sm py-3 px-4 rounded-xl shadow-sm transition-all group">
+                    <i class="fa-solid fa-phone text-xs text-neutral-400 group-hover:text-white transition-colors"></i>
+                    <span>Call Support</span>
+                </a>
+                
+                <a href="https://wa.me/917411081276" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center space-x-2.5 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-sm py-3 px-4 rounded-xl shadow-sm transition-all group">
+                    <i class="fa-brands fa-whatsapp text-sm text-white transition-colors"></i>
+                    <span>WhatsApp</span>
+                </a>
+                
+                <a href="mailto:ttltechnologies.tech@gmail.com" class="flex items-center justify-center space-x-2.5 bg-white border border-neutral-200 hover:bg-neutral-50 text-neutral-800 font-semibold text-sm py-3 px-4 rounded-xl shadow-xs transition-all group">
+                    <i class="fa-solid fa-envelope text-xs text-neutral-400 group-hover:text-neutral-800 transition-colors"></i>
+                    <span>Email Us</span>
+                </a>
+            </div>
+        </section>
+        
+    </main>
+
+    <footer class="border-t border-neutral-200 bg-white py-6 text-xs text-neutral-400">
+        <div class="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-2">
+            <p>&copy; 2026 ttltechnologies. All rights reserved.</p>
+            <div class="flex space-x-1 items-center">
+                <i class="fa-solid fa-qrcode text-neutral-400"></i>
+                <span class="font-medium text-neutral-600">ttltechnologies</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const backToTopBtn = document.getElementById("backToTopBtn");
+
+        window.onscroll = function() {
+            scrollFunction();
+        };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
+                backToTopBtn.classList.remove("translate-y-10", "opacity-0", "pointer-events-none");
+            } else {
+                backToTopBtn.classList.add("translate-y-10", "opacity-0", "pointer-events-none");
+            }
+        }
+
+        backToTopBtn.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+
+        // Carousel Core Engine Layout
+        let activeSlideIdx = 0;
+        const carouselItems = document.querySelectorAll('.carousel-item');
+        const indicatorContainer = document.getElementById('carouselIndicators');
+        let autoLoopTimer = setInterval(handleNextSlide, 6000); // 6-second auto transition
+
+        function updateCarouselDisplay() {
+            carouselItems.forEach((item, index) => {
+                if (index === activeSlideIdx) {
+                    item.classList.remove('opacity-0', 'pointer-events-none', 'z-0');
+                    item.classList.add('opacity-100', 'z-10');
+                } else {
+                    item.classList.remove('opacity-100', 'z-10');
+                    item.classList.add('opacity-0', 'pointer-events-none', 'z-0');
+                }
+            });
+
+            // Update Progress Dots Layout State
+            const indicatorButtons = indicatorContainer.querySelectorAll('button');
+            indicatorButtons.forEach((btn, index) => {
+                if (index === activeSlideIdx) {
+                    btn.className = "w-6 h-1.5 bg-neutral-950 rounded-full transition-all duration-300";
+                } else {
+                    btn.className = "w-2 h-1.5 bg-neutral-950/40 rounded-full transition-all duration-300";
+                }
+            });
+        }
+
+        function handleNextSlide() {
+            activeSlideIdx = (activeSlideIdx + 1) % carouselItems.length;
+            updateCarouselDisplay();
+            refreshAutoTimer();
+        }
+
+        function handlePrevSlide() {
+            activeSlideIdx = (activeSlideIdx - 1 + carouselItems.length) % carouselItems.length;
+            updateCarouselDisplay();
+            refreshAutoTimer();
+        }
+
+        function goToIndex(targetIndex) {
+            activeSlideIdx = targetIndex;
+            updateCarouselDisplay();
+            refreshAutoTimer();
+        }
+
+        function refreshAutoTimer() {
+            clearInterval(autoLoopTimer);
+            autoLoopTimer = setInterval(handleNextSlide, 6000);
+        }
+
+        // Full Screen Lightbox Handlers
+        function openFullscreenImg() {
+            const currentImgElement = carouselItems[activeSlideIdx].querySelector('img');
+            if (!currentImgElement) return;
+
+            const viewer = document.getElementById('fullscreenViewer');
+            const viewerImg = document.getElementById('fullscreenTargetImg');
+
+            viewerImg.src = currentImgElement.src;
+            viewerImg.alt = currentImgElement.alt;
+
+            // Trigger animations
+            viewer.classList.remove('hidden');
+            viewer.classList.add('flex');
+            
+            setTimeout(() => {
+                viewer.classList.remove('opacity-0');
+                viewer.classList.add('opacity-100');
+                viewerImg.classList.remove('scale-95');
+                viewerImg.classList.add('scale-100');
+            }, 10);
+            
+            // Lock scrolling on document frame
+            document.body.classList.add('overflow-hidden');
+        }
+
+        function closeFullscreenImg() {
+            const viewer = document.getElementById('fullscreenViewer');
+            const viewerImg = document.getElementById('fullscreenTargetImg');
+
+            viewer.classList.remove('opacity-100');
+            viewer.classList.add('opacity-0');
+            viewerImg.classList.remove('scale-100');
+            viewerImg.classList.add('scale-95');
+
+            setTimeout(() => {
+                viewer.classList.remove('flex');
+                viewer.classList.add('hidden');
+            }, 300);
+
+            // Re-enable page interaction scrollings
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        // Event listener for Escape key to close full screen image
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeFullscreenImg();
+            }
+        });
+
+        // Maximum Layout Architecture Parameters
+        let selectedMatrix = 'round';
+        let outerEyeClass = 'rounded-full';
+        let innerPupilClass = 'rounded-full';
+        let colorThemeClass = 'neutral-900';
+        let colorLabel = 'Onyx';
+        let logoIsIsolated = false;
+
+        function updateLayoutString() {
+            const codeMap = { round: 'SR', halftone: 'DH', minimal: 'CM', geometric: 'GE', liquid: 'LQ', cross: 'AC' };
+            document.getElementById('maxLayoutCode').innerText = `${codeMap[selectedMatrix]}-${colorLabel}`;
+        }
+
+        function updateMatrixStyle(matrixType) {
+            selectedMatrix = matrixType;
+            
+            // Clean active selection profiles
+            document.querySelectorAll('.matrix-btn').forEach(btn => {
+                btn.className = "matrix-btn text-left p-2.5 border border-neutral-200 rounded-xl bg-white hover:bg-neutral-50 transition-all";
+                btn.querySelector('p:first-child').className = "text-xs font-bold text-neutral-900";
+                btn.querySelector('p:last-child').className = "text-[10px] text-neutral-400 mt-0.5";
+            });
+
+            // Activate current selection visual card
+            const targetBtn = document.getElementById(`m-${matrixType}`);
+            targetBtn.className = "matrix-btn text-left p-2.5 border border-neutral-950 rounded-xl bg-neutral-950 text-white transition-all";
+            targetBtn.querySelector('p:first-child').className = "text-xs font-bold text-white";
+            targetBtn.querySelector('p:last-child').className = "text-[10px] opacity-75 mt-0.5";
+
+            // Remap individual vectors coordinates configuration patterns
+            document.querySelectorAll('.preview-dot').forEach(dot => {
+                // Keep base layout color matches synced 
+                let baseColorClass = `bg-${colorThemeClass}`;
+                dot.style.borderRadius = "";
+                dot.style.transform = "";
+
+                if(matrixType === 'round') {
+                    dot.className = `preview-dot w-3 h-3 ${baseColorClass} rounded-full m-auto`;
+                } else if(matrixType === 'halftone') {
+                    dot.className = `preview-dot w-2 h-2 ${baseColorClass} rounded-full m-auto`;
+                } else if(matrixType === 'minimal') {
+                    dot.className = `preview-dot w-3 h-3 ${baseColorClass} rounded-sm m-auto`;
+                } else if(matrixType === 'geometric') {
+                    dot.className = `preview-dot w-2.5 h-2.5 ${baseColorClass} transform rotate-45 m-auto`;
+                } else if(matrixType === 'liquid') {
+                    dot.className = `preview-dot w-3.5 h-2 ${baseColorClass} rounded-full m-auto`;
+                } else if(matrixType === 'cross') {
+                    dot.className = `preview-dot w-3.5 h-1 ${baseColorClass} rounded-none m-auto relative before:content-[''] before:absolute before:w-1 before:h-3.5 before:bg-inherit before:left-1 before:-top-1.5`;
+                }
+            });
+            updateLayoutString();
+        }
+
+        function updateEyeOuter(outerClass) {
+            outerEyeClass = outerClass;
+            ['max-eye-tl', 'max-eye-tr', 'max-eye-bl'].forEach(id => {
+                const element = document.getElementById(id);
+                element.className = `w-full h-full border-[5px] border-${colorThemeClass} ${outerEyeClass} flex items-center justify-center p-1.5 transition-all duration-300`;
+            });
+        }
+
+        function updateEyeInner(innerClass) {
+            innerPupilClass = innerClass;
+            ['max-pupil-tl', 'max-pupil-tr', 'max-pupil-bl'].forEach(id => {
+                const element = document.getElementById(id);
+                element.className = `w-full h-full bg-${colorThemeClass} ${innerPupilClass} transition-all duration-300`;
+            });
+        }
+
+        function updateColorProfile(colorClass) {
+            colorThemeClass = colorClass;
+            const labelMap = { 'neutral-900': 'Onyx', 'blue-600': 'Cyber', 'emerald-700': 'Tech', 'red-700': 'Royal' };
+            colorLabel = labelMap[colorClass];
+
+            // Re-render interface control button boundaries
+            document.querySelectorAll('.color-btn').forEach(btn => {
+                btn.className = "color-btn border border-neutral-200 p-2 rounded-xl flex items-center justify-center space-x-1.5 bg-white";
+                btn.querySelector('span:last-child').className = "text-[10px] font-medium text-neutral-600";
+            });
+
+            event.currentTarget.className = `color-btn border-2 border-neutral-950 p-2 rounded-xl flex items-center justify-center space-x-1.5 bg-white`;
+            event.currentTarget.querySelector('span:last-child').className = "text-[10px] font-bold text-neutral-900";
+
+            // Force global refresh mapping engine styles instantly 
+            updateMatrixStyle(selectedMatrix);
+            updateEyeOuter(outerEyeClass);
+            updateEyeInner(innerPupilClass);
+            
+            // Adjust visual colors of active dynamic layer components inside elements
+            document.getElementById('sandboxLogoIcon').className = `fa-solid fa-briefcase text-${colorThemeClass} text-sm`;
+        }
+
+        function toggleCenterLogo(isChecked) {
+            logoIsIsolated = isChecked;
+            const logoBlock = document.getElementById('sandboxLogoCore');
+            const innerNodes = ['center-node-1', 'center-node-2', 'center-node-3', 'center-node-4', 'center-node-5'];
+
+            if(isChecked) {
+                logoBlock.className = "absolute inset-0 m-auto w-11 h-11 bg-white border border-neutral-200 rounded-xl shadow-md flex items-center justify-center scale-100 opacity-100 transition-all duration-300 z-10";
+                innerNodes.forEach(id => {
+                    document.getElementById(id).style.opacity = '0';
+                });
+            } else {
+                logoBlock.className = "absolute inset-0 m-auto w-11 h-11 bg-white border border-neutral-200 rounded-xl shadow-md flex items-center justify-center scale-0 opacity-0 transition-all duration-300 z-10";
+                innerNodes.forEach(id => {
+                    document.getElementById(id).style.opacity = '1';
+                });
+            }
+        }
+    </script>
+
+</body>
+</html>
